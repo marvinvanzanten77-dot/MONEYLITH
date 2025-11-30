@@ -1,0 +1,675 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #02060d;
+  color: #f5f5f5;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.moneylith-shell {
+  min-height: 100vh;
+  background: #02060d;
+  color: #f5f5f5;
+}
+
+.moneylith-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+}
+
+.moneylith-header {
+  background: rgba(3, 7, 18, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  height: 78px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+  margin-bottom: 1.75rem;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.moneylith-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.moneylith-header-logo img {
+  width: 46px;
+  height: auto;
+  display: block;
+}
+
+.h1-label {
+  font-size: 32px;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.moneylith-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.moneylith-tab {
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.65rem 1.45rem;
+  background: rgba(7, 13, 29, 0.8);
+  color: #cbd5f5;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s ease, border 0.2s ease, color 0.2s ease;
+}
+
+.moneylith-tab:hover {
+  background: rgba(63, 129, 255, 0.12);
+  border-color: rgba(63, 129, 255, 0.45);
+}
+
+.moneylith-tab--active {
+  background: #0f1c2b;
+  border-color: #39b6ff;
+  color: #ffffff;
+}
+
+.moneylith-tab-icon {
+  font-size: 1.1rem;
+}
+
+.moneylith-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.moneylith-page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 0 2rem;
+}
+
+.moneylith-section-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.moneylith-card {
+  background: #071523;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #92a0b3;
+  margin: 0.35rem 0 0;
+}
+
+.card-meta {
+  font-size: 30px;
+  font-weight: 700;
+  color: #f8fafc;
+  min-width: 4rem;
+  text-align: right;
+}
+
+.card-body {
+  font-size: 15px;
+  color: #cfd6e6;
+  line-height: 1.6;
+}
+
+.moneylith-pill {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.65rem 1.1rem;
+  color: #d9e2ff;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.moneylith-pill--primary {
+  border-color: rgba(57, 192, 255, 0.65);
+}
+
+.moneylith-pill:hover {
+  background: rgba(57, 192, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.section-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.section-panel {
+  background: #071523;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.section-panel.full-width {
+  min-width: 100%;
+}
+
+.section-panel header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.section-label--small {
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.section-title {
+  font-size: 28px;
+  margin: 0.25rem 0;
+}
+
+.section-label {
+  font-size: 0.85rem;
+  color: #cfd6e6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.account-form-select {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.02);
+  color: #f5f5f5;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+
+.section-value {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  color: #fefefe;
+}
+
+.section-helper {
+  font-size: 0.9rem;
+  color: #9fb0cf;
+  margin: 0;
+}
+
+.section-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.section-table th,
+.section-table td {
+  text-align: left;
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  color: #e2e8ff;
+}
+
+.section-table th {
+  color: #9aa7c8;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.section-amount-right {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fefefe;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.calendar-day {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.65rem;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+.calendar-day small {
+  color: #92a0b3;
+}
+
+.summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.summary-badge {
+  border-radius: 16px;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+}
+
+.list-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.list-card:last-child {
+  border-bottom: none;
+}
+
+.placeholder-pill {
+  border-radius: 12px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.75rem;
+  background: rgba(57, 182, 255, 0.15);
+  color: #4fd2ff;
+}
+
+.moneylith-splash {
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 20%, rgba(57, 182, 255, 0.2), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(9, 19, 40, 0.8), transparent 50%),
+    #02060d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.moneylith-splash-card {
+  background: rgba(5, 13, 24, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2rem;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  max-width: 460px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+}
+
+.moneylith-splash-logo {
+  width: 190px;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+
+.moneylith-splash-text {
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+}
+
+.moneylith-splash-action {
+  border: 1px solid #39b6ff;
+  background: transparent;
+  color: #f5f5f5;
+  font-size: 1rem;
+  padding: 0.95rem 2.2rem;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  margin-bottom: 0.75rem;
+}
+
+.moneylith-splash-action:hover {
+  background: rgba(57, 182, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.moneylith-splash-subtext {
+  font-size: 0.85rem;
+  color: #7c8ba4;
+  margin: 0;
+}
+
+.accounts-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.accounts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.section-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.section-title {
+  font-size: 26px;
+  margin: 0.1rem 0;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: #7c8ba4;
+  margin: 0;
+}
+
+.accounts-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.account-card {
+  background: #051426;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.account-card-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.account-card h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.account-card .iban {
+  margin: 0.35rem 0 0;
+  color: #cfd6e6;
+  font-size: 13px;
+}
+
+.account-card .meta {
+  font-size: 13px;
+  color: #92a0b3;
+  margin: 0.15rem 0 0;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 12px;
+  background: rgba(57, 182, 255, 0.1);
+  color: #4fd2ff;
+}
+
+.account-actions {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.ghost-button {
+  flex: 1;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #f5f5f5;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border 0.2s ease;
+}
+
+.ghost-button:hover {
+  background: rgba(57, 182, 255, 0.15);
+}
+
+.ghost-button--alert {
+  border-color: rgba(255, 95, 108, 0.4);
+}
+
+.ghost-button--alert:hover {
+  background: rgba(255, 95, 108, 0.25);
+}
+
+.account-form-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 13, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 1rem;
+}
+
+.account-form {
+  width: min(520px, 100%);
+  background: #050d18;
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+.account-form--confirm {
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.account-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: #cfd6e6;
+}
+
+.account-form input,
+.account-form select {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.75rem 1rem;
+  color: #f5f5f5;
+  font-size: 0.95rem;
+}
+
+.account-form input:focus,
+.account-form select:focus {
+  outline: none;
+  border-color: rgba(57, 182, 255, 0.7);
+}
+
+.checkbox-row {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.form-error {
+  color: #ff7b89;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Dashboard top tiles */
+.main-nav-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .main-nav-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .main-nav-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.main-nav-card {
+  border-radius: 1.25rem;
+  background-color: #040d19;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+}
+
+.main-nav-card h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+}
+
+.main-nav-card p {
+  font-size: 0.9rem;
+  color: #8a96b3;
+  margin: 0;
+}
+
+.main-nav-card button {
+  margin-top: 1rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #42a4ff;
+  cursor: pointer;
+}
+
+.main-nav-card button:hover {
+  color: #ffffff;
+}
+
+.summary-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.summary-tile {
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: #071020;
+  padding: 0.75rem 0.9rem;
+}
+
+.summary-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: #8a96b3;
+  margin: 0;
+}
+
+.summary-value {
+  margin-top: 0.3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.summary-helper {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: #8a96b3;
+}
+
+
+

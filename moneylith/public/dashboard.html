@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Moneylith Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: #02060d;
+        color: #f5f5f5;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #02060d;
+      }
+
+      .app {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.25rem;
+      }
+
+      p {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        color: #9fb0cf;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+      }
+
+      .tile {
+        background: #050d18;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 18px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .tile a {
+        color: #39b6ff;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .tile span {
+        font-size: 0.85rem;
+        color: #9fb0cf;
+        margin-top: 0.5rem;
+      }
+
+      .bulk-card {
+        margin-top: 2rem;
+        background: #031025;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 18px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      }
+
+      .bulk-card label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        color: #cfd6e6;
+        margin-bottom: 0.9rem;
+        font-size: 0.95rem;
+      }
+
+      .bulk-card input,
+      .bulk-card select {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.6rem 0.8rem;
+        background: rgba(255, 255, 255, 0.02);
+        color: #f5f5f5;
+      }
+
+      #bulk-result {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border-radius: 12px;
+        background: rgba(57, 182, 255, 0.1);
+        color: #7bdcff;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <h1>Dashboard</h1>
+      <p>Kies een onderdeel van Moneylith om verder te werken.</p>
+      <div class="grid">
+        <div class="tile">
+          <strong>Maandoverzicht</strong>
+          <span>Bekijk gedetailleerde maandgegevens van je transacties.</span>
+          <a href="/maand.html">Ga naar maandoverzicht</a>
+        </div>
+        <div class="tile">
+          <strong>Budgetten</strong>
+          <span>Plan je maandelijkse uitgaven en houd ze bij.</span>
+          <a href="/budget.html">Budgetten</a>
+        </div>
+        <div class="tile">
+          <strong>Vaste lasten</strong>
+          <span>Bekijk vaste lasten & vrije ruimte per maand.</span>
+          <a href="/vaste-lasten.html">Vaste lasten</a>
+        </div>
+        <div class="tile">
+          <strong>Instellingen</strong>
+          <span>Regels en alerts beheersen (nog in ontwikkeling).</span>
+          <a href="#">Bekijk later</a>
+        </div>
+      </div>
+      <div class="bulk-card">
+        <h2>Bulk importeren (CSV/PDF)</h2>
+        <p>Kies een bestand (CSV of PDF) en upload om transacties automatisch te indexeren.</p>
+        <label>
+          Bestand
+          <input type="file" id="bulk-file" />
+        </label>
+        <label>
+          Type
+          <select id="bulk-type">
+            <option value="csv">CSV</option>
+            <option value="pdf">PDF</option>
+          </select>
+        </label>
+        <button id="bulk-upload" type="button">Uploaden & indexeren</button>
+        <div id="bulk-result"></div>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="./dashboard.js"></script>
+</html>

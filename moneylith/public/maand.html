@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Moneylith - Maandoverzicht</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: #02060d;
+        color: #f5f5f5;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #02060d;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      h1 {
+        margin-bottom: 0.25rem;
+        font-size: 2rem;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+        align-items: flex-end;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.85rem;
+        color: #9fb0cf;
+        gap: 0.35rem;
+      }
+
+      select {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 0.6rem 0.9rem;
+        color: #f5f5f5;
+        font-size: 1rem;
+      }
+
+      button {
+        border: none;
+        border-radius: 999px;
+        padding: 0.8rem 1.6rem;
+        font-size: 1rem;
+        background: #39b6ff;
+        color: #02060d;
+        cursor: pointer;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+
+      button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      .stats {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+
+      .stat-card {
+        flex: 1;
+        min-width: 200px;
+        background: #050d18;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      }
+
+      .stat-card strong {
+        display: block;
+        font-size: 1.4rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+      }
+
+      th,
+      td {
+        padding: 0.65rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: left;
+      }
+
+      .perdag {
+        max-width: 400px;
+        background: #031025;
+        border-radius: 14px;
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .error {
+        margin-top: 1rem;
+        padding: 0.8rem;
+        background: rgba(255, 95, 108, 0.15);
+        border-radius: 12px;
+        color: #ff9fa8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Maandoverzicht</h1>
+      <p>Kies een jaar en maand om je inkomsten, uitgaven en transacties te bekijken.</p>
+      <div class="controls">
+        <label>
+          Jaar
+          <select id="jaar-select"></select>
+        </label>
+        <label>
+          Maand
+          <select id="maand-select">
+            <option value="01">01 - Januari</option>
+            <option value="02">02 - Februari</option>
+            <option value="03">03 - Maart</option>
+            <option value="04">04 - April</option>
+            <option value="05">05 - Mei</option>
+            <option value="06">06 - Juni</option>
+            <option value="07">07 - Juli</option>
+            <option value="08">08 - Augustus</option>
+            <option value="09">09 - September</option>
+            <option value="10">10 - Oktober</option>
+            <option value="11">11 - November</option>
+            <option value="12">12 - December</option>
+          </select>
+        </label>
+        <button id="load-maand">Laad overzicht</button>
+      </div>
+
+      <div id="error" class="error" style="display: none;"></div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <span>Inkomsten</span>
+          <strong id="inkomsten">-</strong>
+        </div>
+        <div class="stat-card">
+          <span>Uitgaven</span>
+          <strong id="uitgaven">-</strong>
+        </div>
+        <div class="stat-card">
+          <span>Saldo</span>
+          <strong id="saldo">-</strong>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Per categorie</h2>
+        <div id="per-categorie-empty" class="message" style="display: none;">Geen categorie-data beschikbaar voor deze maand.</div>
+        <table id="per-categorie-table">
+          <thead>
+            <tr>
+              <th>Categorie</th>
+              <th>Totaal</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Transacties</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Rekening</th>
+              <th>Bedrag</th>
+              <th>Omschrijving</th>
+              <th>Bron</th>
+            </tr>
+          </thead>
+          <tbody id="transactie-body"></tbody>
+        </table>
+      </div>
+
+      <div class="perdag">
+        <h3>Per dag</h3>
+        <ul id="perdag-list" style="list-style: none; padding: 0; margin: 0;"></ul>
+      </div>
+    </div>
+    <script type="module" src="./maand.js"></script>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Moneylith - Vaste lasten</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: #02060d;
+        color: #f5f5f5;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #02060d;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      h1 {
+        margin-bottom: 0.25rem;
+      }
+      .section {
+        background: #050d18;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 18px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        margin-bottom: 1.5rem;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        align-items: flex-end;
+      }
+      label {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.85rem;
+        color: #9fb0cf;
+        gap: 0.35rem;
+      }
+      select {
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.02);
+        padding: 0.6rem 0.9rem;
+        color: #f5f5f5;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+      }
+      .summary-card {
+        background: #031025;
+        border-radius: 14px;
+        padding: 1rem;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .summary-card span {
+        display: block;
+        font-size: 0.9rem;
+        color: #9fb0cf;
+      }
+      .summary-card strong {
+        font-size: 1.5rem;
+        margin-top: 0.35rem;
+      }
+      button {
+        border: none;
+        border-radius: 999px;
+        padding: 0.75rem 1.5rem;
+        background: #39b6ff;
+        color: #02060d;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+      button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+      .message {
+        margin-top: 0.75rem;
+        font-size: 0.95rem;
+        color: #7bdcff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Vaste lasten & vrije ruimte</h1>
+      <div class="section">
+        <h2>Maandelijkse samenvatting</h2>
+        <div class="controls">
+          <label>
+            Jaar
+            <select id="vaste-jaar"></select>
+          </label>
+          <label>
+            Maand
+            <select id="vaste-maand">
+              <option value="01">01 - Januari</option>
+              <option value="02">02 - Februari</option>
+              <option value="03">03 - Maart</option>
+              <option value="04">04 - April</option>
+              <option value="05">05 - Mei</option>
+              <option value="06">06 - Juni</option>
+              <option value="07">07 - Juli</option>
+              <option value="08">08 - Augustus</option>
+              <option value="09">09 - September</option>
+              <option value="10">10 - Oktober</option>
+              <option value="11">11 - November</option>
+              <option value="12">12 - December</option>
+            </select>
+          </label>
+          <button id="load-vaste">Laad overzicht</button>
+        </div>
+        <div class="summary" id="vaste-summary">
+          <div class="summary-card">
+            <span>Inkomsten</span>
+            <strong id="vaste-inkomsten">-</strong>
+          </div>
+          <div class="summary-card">
+            <span>Uitgaven</span>
+            <strong id="vaste-uitgaven">-</strong>
+          </div>
+          <div class="summary-card">
+            <span>Vaste lasten</span>
+            <strong id="vaste-vaste">-</strong>
+          </div>
+          <div class="summary-card">
+            <span>Vrije ruimte</span>
+            <strong id="vaste-vrije">-</strong>
+          </div>
+        </div>
+        <div id="vaste-error" class="message" style="display:none;"></div>
+      </div>
+    <div class="section">
+      <h2>Detectie van vaste lasten</h2>
+      <p>Detecteer automatisch terugkerende uitgaven en markeer ze als vaste lasten.</p>
+      <button id="detect-vaste">Detecteer vaste lasten</button>
+      <div id="detect-result" class="message"></div>
+    </div>
+    <div class="section" id="vaste-lasten-beheer">
+      <h2>Vaste lasten beheer</h2>
+      <div class="controls">
+        <label>
+          Toon:
+          <select id="filter-actief">
+            <option value="alle">Alle</option>
+            <option value="1">Alleen actief</option>
+            <option value="0">Alleen inactief</option>
+          </select>
+        </label>
+        <button id="btn-herlaad-groepen" type="button">Herlaad groepen</button>
+        <span id="groepen-status" class="message"></span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table id="vaste-lasten-groepen-tabel">
+          <thead>
+            <tr>
+              <th>Actief</th>
+              <th>Omschrijving</th>
+              <th>Rekening</th>
+              <th>Gemiddeld bedrag</th>
+              <th>Aantal keer</th>
+              <th>Eerste datum</th>
+              <th>Laatste datum</th>
+              <th>Categorie</th>
+              <th>Notitie</th>
+              <th>Transacties</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="groep-transacties-paneel" class="section" style="display:none; margin-top:1rem;">
+        <h3>Transacties voor geselecteerde vaste last</h3>
+        <div id="groep-transacties-info" class="message"></div>
+        <div style="overflow-x:auto;">
+          <table id="groep-transacties-tabel">
+            <thead>
+              <tr>
+                <th>Datum</th>
+                <th>Bedrag</th>
+                <th>Rekening</th>
+                <th>Omschrijving</th>
+                <th>Vaste last</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <button id="btn-sluit-transacties" type="button">Sluiten</button>
+      </div>
+    </div>
+  </div>
+    <script type="module" src="./vaste-lasten.js" defer></script>
+  </body>
+</html>
